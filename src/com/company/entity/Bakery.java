@@ -1,4 +1,6 @@
 package com.company.entity;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by govno on 27.03.2016.
@@ -13,4 +15,8 @@ public class Bakery {
         this.phone = phone;
         this.stockAvailability = stockAvailability;
     }
+
+
+
 }
+

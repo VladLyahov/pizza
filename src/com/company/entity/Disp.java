@@ -16,7 +16,7 @@ public class Disp {
 
     public static ArrayList tempRouteDriver = new ArrayList();
 
-    public static void doNewRouteArray(int[][] route, int[] apdate) {
+    public static int[] doNewRouteArray(int[][] route, int[] apdate) {
         int[][] newRoute = new int[route.length + 1][route.length + 1];
 
         for (int i = 0; i < route.length; i++) {
@@ -40,21 +40,35 @@ public class Disp {
                 temp.add(newRoute[i][j]);
         }
 
-        for (int k=0;k <3;k++){
-
-
+        for (int k=0;k <newRoute.length-1;k++){
             //return newRoute;
             Disp.iteration(temp, k,dimension-k);
-            //System.out.println("----------------------");
-            //temp.clear();
+            toDisp.sortMove(tempRouteDriver);
         }
+        tempRouteDriver.add(0);
+        tempRouteDriver.add(0);
+        toDisp.sortMove(tempRouteDriver);
+        toDisp.directionRout(tempRouteDriver);
+        int S=toDisp.sumPris(newRoute,tempRouteDriver);
+        System.out.println(" ");
+        System.out.println("~~~~~~~~~~~~~"+S+"~~~~~~~~~~~~~");
+
+
+        int []  Route = new int[tempRouteDriver.size()];
+        for (int j = 0; j < tempRouteDriver.size(); j++) {
+            Route[j] = (int) tempRouteDriver.get(j);
+        }
+
         System.out.println("----------------------");
         for (int i =0; i<tempRouteDriver.size();i++){
+            if (i%2==0) System.out.print("  ");
             System.out.print(" "+tempRouteDriver.get(i));
         }
-
-
+        return Route;
     }
+
+
+
 
     public static ArrayList iteration (ArrayList temp,int numberOfSteps,int dimension){
         System.out.println("");
@@ -66,18 +80,12 @@ public class Disp {
             for (int j = 0; j < dimension; j++, k++) {
                 newRoute[i][j] = (int) temp.get(k);
                 System.out.print(" "+newRoute[i][j]);
-
             }
         }
 
-
-
         int tempArray[][] = new int[newRoute.length][newRoute.length + 1];
 
-
-
         //int min=newRoute[k][0];
-
         for (int i = 0, min = 666; i < newRoute.length; i++) {
             for (int j = 0; j < newRoute.length + 1; j++) {
                 if (j == newRoute.length) {
@@ -137,9 +145,15 @@ public class Disp {
                 if (tempLineArray[i][j] == 0) {
                     for (int k = 0; k < newRoute.length + 1; k++) {
                         if (k == newRoute.length) {
+                            if (min !=666){
                             zerroArray[zerroCounter][0] = min;
                             zerroArray[zerroCounter][1] = i;
-                            zerroArray[zerroCounter][2] = jIndex;
+                            zerroArray[zerroCounter][2] = j;//Index;
+                            } else {
+                                zerroArray[zerroCounter][0] = 0;
+                                zerroArray[zerroCounter][1] = i;
+                                zerroArray[zerroCounter][2] = j;//Index;
+                            }
                             zerroCounter++;
                             min = 666;
                             continue;
@@ -159,7 +173,7 @@ public class Disp {
                 if (tempLineArray[i][j] == 0) {
                     for (int k = 0; k < newRoute.length + 1; k++) {
                         if (k == newRoute.length) {
-                            zerroArray[zerroCounter][0] += min;
+                            if (min !=666)   zerroArray[zerroCounter][0] += min;
                             zerroCounter++;
                             min = 666;
                             continue;
@@ -171,6 +185,7 @@ public class Disp {
                 }
             }
         }
+
         System.out.println(" ");
         System.out.println("novii massiv");
         for (int i = 0; i < zerroArray.length; i++) {
@@ -188,7 +203,8 @@ public class Disp {
         }
 
         System.out.println(iIndex);
-        tempRouteDriver.add(zerroArray[iIndex][1]*10+zerroArray[iIndex][2]);
+        tempRouteDriver.add(zerroArray[iIndex][1]);
+        tempRouteDriver.add(zerroArray[iIndex][2]);
         //tempRouteDriver.add(zerroArray[iIndex][2]);
 
         System.out.println("==================");
@@ -213,18 +229,13 @@ public class Disp {
         }
         System.out.println(" ");
         System.out.println("step step step step step step step step step ");
-
         //ArrayList <Integer>temp = new ArrayList();
         temp.clear();
-
         for (int i = 0; i < newRoute.length-1; i++) {
             for (int j = 0; j < newRoute.length-1; j++)
                 temp.add(stepRoute[i][j]);
         }
         return temp;
-
-
-
     }
 
 }
