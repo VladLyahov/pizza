@@ -16,7 +16,14 @@ public class Disp {
 
     public static ArrayList tempRouteDriver = new ArrayList();
 
-    public static int[] doNewRouteArray(int[][] route, int[] apdate) {
+    public static int[] doNewRouteArray(ArrayList routeTab, ArrayList apdate) {
+        int[][] route=new int[(int) Math.sqrt(routeTab.size())][(int) Math.sqrt(routeTab.size())];
+        for (int i = 0,k=0; i < route.length; i++) {
+            for (int j = 0; j < route.length; j++, k++) {
+                route[i][j] = (int) routeTab.get(k);
+            }
+        }
+
         int[][] newRoute = new int[route.length + 1][route.length + 1];
 
         for (int i = 0; i < route.length; i++) {
@@ -24,11 +31,11 @@ public class Disp {
                 newRoute[i][j] = route[i][j];
         }
 
-        for (int i = 0; i < apdate.length / 2; i++) {
-            newRoute[route.length][i] = apdate[i];
+        for (int i = 0; i < apdate.size() / 2; i++) {
+            newRoute[route.length][i] = (int) apdate.get(i);
         }
-        for (int i = (apdate.length + 1) / 2, k = 0; i < apdate.length; i++, k++) {
-            newRoute[k][route.length] = apdate[i];
+        for (int i = (apdate.size() ) / 2, k = 0; i < apdate.size(); i++, k++) {
+            newRoute[k][route.length] = (int) apdate.get(i);
         }
 
         newRoute[route.length][route.length] = 666;

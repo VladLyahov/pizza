@@ -2,9 +2,12 @@ package com.company;
 
 import com.company.entity.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+    public static ArrayList<Integer> routeTab=new ArrayList<>();
+    public static ArrayList<Integer> apdate=new ArrayList<>();
 
     public static void main(String[] args) {
 //        Dispatcher.doNewRoute(new int[][]{{666,1,6},{6,666,2},{6,6,666}}, new int[]{3, 6, 6,6,6,3});
@@ -27,9 +30,14 @@ public class Main {
 //        int b =7;
 //        b = Metod.sss(b);
 //        System.out.println(a-b);
+        int [] []A =new int[][]{{666,5,11},{10,666,8},{7,14,666}};
+        int [] AA = new int[]{12, 6, 15,9,7,8};
+        //ArrayList<Integer>B=toDisp.intToArray(A);
+        routeTab=toDisp.intIntToArray(A);
+        apdate=toDisp.intToArray(AA);
 
 
-       int [] AAA = Disp.doNewRouteArray(new int[][]{{666,5,11},{10,666,8},{7,14,666}}, new int[]{12, 6, 15,9,7,8});
+       int [] AAA = Disp.doNewRouteArray(routeTab, apdate);
       // int [] AAA = Disp.doNewRouteArray(new int[][]{{666,1},{666,666}},new int[]{3,666,666,2});
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
         for (int i = 0; i <AAA.length ; i++) {
